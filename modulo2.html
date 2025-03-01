@@ -78,41 +78,42 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxtzZxbuKNjZ-yMb5hnjp7zWS1zMe7RKEG6Ggn1hCriBynP8wKdIWb8_uilnMNyCGYh/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw-V54V7i1t4XSbJb075OZrIAgcHkkpbK6psfhtJTE1hjK2wYu9rN2-rI3Uceqq-TVbOQ/exec';
     
         document.querySelector("form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            
-            const form = e.target;
-            const submitButton = form.querySelector("button[type=submit]");
+    e.preventDefault();
     
-            // Disabilita il pulsante e cambia il testo
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Invio in corso...';
-    
-            fetch(scriptURL, { 
-                method: 'POST', 
-                body: new FormData(form)
-            })
-            .then(response => response.json()) 
-            .then(data => {
-                if (data.success) {
-                    alert("Rapporto inviato correttamente.");
-                    form.reset();
-                } else {
-                    throw new Error(data.error);
-                }
-            })
-            .catch(error => {
-                alert("Errore durante l'invio: " + error.message);
-                console.error('Errore!', error);
-            })
-            .finally(() => {
-                // Riabilita il pulsante e ripristina il testo
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Invia';
-            });
-        });
+    const form = e.target;
+    const submitButton = form.querySelector("button[type=submit]");
+
+    // Disabilita il pulsante e cambia il testo
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Invio in corso...';
+
+    fetch(scriptURL, { 
+        method: 'POST', 
+        body: new FormData(form),
+        mode: 'cors'  // Aggiungi questa opzione per gestire CORS
+    })
+    .then(response => response.json()) 
+    .then(data => {
+        if (data.success) {
+            alert("Rapporto inviato correttamente.");
+            form.reset();
+        } else {
+            throw new Error(data.error);
+        }
+    })
+    .catch(error => {
+        alert("Errore durante l'invio: " + error.message);
+        console.error('Errore!', error);
+    })
+    .finally(() => {
+        // Riabilita il pulsante e ripristina il testo
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Invia';
+    });
+});
     </script>
 </body>
 </html>
