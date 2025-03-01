@@ -97,6 +97,7 @@
     
             fetch(scriptURL, { 
                 method: 'POST', 
+                mode: "no-cors",
                 body: new FormData(form)
             })
             .then(response => response.text()) // Cambiato da response.json() a response.text()
