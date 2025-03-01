@@ -84,7 +84,7 @@
        // const apiUrlResponse = await fetch('link_script_dati.txt');
        // const apiUrl = await apiUrlResponse.text();
 
-        const scriptURL =  'https://script.google.com/macros/s/AKfycbwuMN7hgAM7QaSJLA0gsnPhD_3FKqmqEOPjz01OfMs3ETC-0Vz4qdEz0z71THVYitIl/exec';
+        const scriptURL =  'https://script.google.com/macros/s/AKfycbx0WKGtVRDOOKVB7qc5lcUt5SfqoT9If8-XiFNvsvmkWYktymst3TH3kXfUuwR0m5mn/exec';
         const form = document.querySelector('#Foglio2');
         const submitButton = document.getElementById('submitButton');
     
@@ -97,7 +97,6 @@
     
             fetch(scriptURL, { 
                 method: 'POST', 
-                mode: "no-cors",
                 body: new FormData(form)
             })
             .then(response => response.text()) // Cambiato da response.json() a response.text()
