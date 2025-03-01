@@ -93,7 +93,7 @@
     fetch(scriptURL, { 
         method: 'POST', 
         body: new FormData(form),
-        mode: 'cors'  // Aggiungi questa opzione per gestire CORS
+        mode: 'no-cors'  // Aggiungi questa opzione per gestire CORS
     })
     .then(response => response.json()) 
     .then(data => {
