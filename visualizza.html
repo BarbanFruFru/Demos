@@ -97,9 +97,6 @@
                     }
                     tr += `<td class='px-6 py-4'>${cellValue}</td>`;
                 });
-                tr += `<td class='px-6 py-4'>
-                        <button onclick='deleteReport("${sheet}", ${row._rowIndex})' class='text-red-600 hover:text-red-900 ml-2'>Elimina</button>
-                    </td>`;
                 tr += `</tr>`;
                 tbody.innerHTML += tr;
             });
