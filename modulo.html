@@ -95,7 +95,6 @@
         body: new FormData(form),
         mode: 'no-cors'  // Aggiungi questa opzione per gestire CORS
     })
-    .then(response => response.json()) 
     .then(data => {
         if (data.success) {
             alert("Rapporto inviato correttamente.");
