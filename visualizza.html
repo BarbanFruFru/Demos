@@ -13,6 +13,10 @@
             font-size: 16px;
             color: gray;
         }
+        .btn:hover {
+            box-shadow: 0 4px rgba(0, 0, 0, 0.2);
+            filter: brightness(0.9);
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -21,7 +25,7 @@
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-3xl font-bold">Dashboard Moduli</h1>
                 <div>
-                    <button onclick="window.location.href='index.html'" class="bg-gray-500 text-white px-4 py-2 rounded">Torna Indietro</button>
+                    <button onclick="window.location.href='index.html'" class="btn bg-gray-500 text-white px-4 py-2 rounded">Torna Indietro</button>
                 </div>
             </div>
 
@@ -30,7 +34,7 @@
                     <option value="Foglio1">Foglio 1</option>
                     <option value="Foglio2">Foglio 2</option>
                 </select>
-                <button onclick="applyFilters()" class="bg-blue-500 text-white px-4 py-2 rounded">Applica Filtri</button>
+                <button onclick="applyFilters()" class="btn bg-blue-500 text-white px-4 py-2 rounded">Applica Filtri</button>
             </div>
 
             <div class="bg-white rounded-lg shadow overflow-x-auto">
