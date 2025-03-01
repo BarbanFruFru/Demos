@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Moduli</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+        }
+        .btn {
+            width: 200px;
+            margin: 10px;
+            font-size: 20px;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .btn:hover {
+            box-shadow: 0 4px rgba(0, 0, 0, 0.2);
+            filter: brightness(0.9);
+        }
+        .supporto {
+            position: absolute;
+            bottom: 10px;
+            font-size: 16px;
+            color: gray;
+        }
+        .content {
+            text-align: center;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .bottone-rosso {
+            background-color: red;
+            color: rgb(0, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center content">
+        <button onclick="window.location.href='old_index.html'" class="button-top-right">
+            Torna Indietro
+        </button>
+        <div class="mt-4">
+            <a href="modulo.html" class="btn bottone-rosso">🗂️ Invia un Modulo</a>
+            <a href="modulo2.html" class="btn bottone-rosso">🗂️ Invia un Modulo 2</a>
+            <a href="visualizza.html" class="btn bottone-rosso">🗂️ Visualizza i  Moduli</a>
+        </div>
+    </div>
+    <div class="supporto">Sviluppato da <a href="https://t.me/+2B8-QEDmMNw0YTc0">@rromaanoprojects</a></div>
+</body>
+</html>

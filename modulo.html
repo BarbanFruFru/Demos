@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moduli Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 100px;
+            padding-bottom: 2rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .button-top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .button-top-right {
+            background-color: gray;
+        }
+        .btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .required-field::after {
+            content: "*";
+            color: red;
+            margin-left: 4px;
+        }
+        .supporto {
+            position: absolute;
+            bottom: 10px;
+            font-size: 16px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Modulo 1</h1>
+        <button onclick="window.location.href='index.html'" class="button-top-right bg-gray-500 text-black px-4 py-2 rounded">
+            Torna Indietro
+        </button>
+        <form id="Documenti">
+            <input type="hidden" name="modulo" value="Foglio2">
+            <h4 class="mb-4">Compila il modulo</h4>
+            <div class="form-group">
+                <label class="required-field">Nome</label>
+                <input type="text" class="form-control" name="Nome" required>
+            </div>
+            <div class="form-group">
+                <label class="required-field">Data</label>
+                <input type="date" class="form-control" name="Data" required>
+            </div>
+            <div class="form-group">
+                <label class="required-field">Ora</label>
+                <input type="time" class="form-control" name="Ora" required>
+            </div>
+            <div class="form-group">
+                <label class="required-field">Campo 1</label>
+                <input type="text" class="form-control" name="Campo1" required>
+            </div>
+            <div class="form-group">
+                <label class="required-field">Campo 2</label>
+                <input type="text" class="form-control" name="Campo2" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="submitButton">Invia</button>
+        </form>
+    </div>
+
+    <script>
+       // const apiUrlResponse = await fetch('link_script_dati.txt');
+       // const apiUrl = await apiUrlResponse.text();
+
+        const scriptURL =  'https://script.google.com/macros/s/AKfycbwuMN7hgAM7QaSJLA0gsnPhD_3FKqmqEOPjz01OfMs3ETC-0Vz4qdEz0z71THVYitIl/exec';
+        const form = document.querySelector('#Foglio1');
+        const submitButton = document.getElementById('submitButton');
+    
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            // Disabilita il pulsante e cambia il testo
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Invio in corso...';
+    
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: new FormData(form)
+            })
+            .then(response => response.text()) // Cambiato da response.json() a response.text()
+            .then(text => {
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    console.error('Errore nel parsing della risposta:', text);
+                    throw new Error("Errore nella risposta del server");
+                }
+    
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                alert("Rapporto inviato correttamente.");
+                form.reset();
+            })
+            .catch(error => {
+                alert("Errore durante l'invio del modulo: " + error.message);
+                console.error('Errore!', error);
+            })
+            .finally(() => {
+                // Riabilita il pulsante e ripristina il testo
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Invia';
+            });
+        });
+    </script>
+</body>
+</html>
