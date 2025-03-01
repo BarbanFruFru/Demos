@@ -78,43 +78,33 @@
     </div>
 
     <script>
-       // const apiUrlResponse = await fetch('link_script_dati.txt');
-       // const apiUrl = await apiUrlResponse.text();
-
-        const scriptURL =  'https://script.google.com/macros/s/AKfycbwMapSUlQgz_601if4RMiz9YGsVWOPlRPnKa-piZbdwItfZ5ynx0fssH9vEIcDd4nPYVA/exec';
-        const form = document.querySelector('#Foglio2');
-        const submitButton = document.getElementById('submitButton');
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxtzZxbuKNjZ-yMb5hnjp7zWS1zMe7RKEG6Ggn1hCriBynP8wKdIWb8_uilnMNyCGYh/exec';
     
-        form.addEventListener('submit', e => {
+        document.querySelector("form").addEventListener("submit", function (e) {
             e.preventDefault();
             
+            const form = e.target;
+            const submitButton = form.querySelector("button[type=submit]");
+    
             // Disabilita il pulsante e cambia il testo
             submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Invio in corso...';
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Invio in corso...';
     
             fetch(scriptURL, { 
                 method: 'POST', 
                 body: new FormData(form)
             })
-            .then(response => response.text()) // Cambiato da response.json() a response.text()
-            .then(text => {
-                let data;
-                try {
-                    data = JSON.parse(text);
-                } catch (e) {
-                    console.error('Errore nel parsing della risposta:', text);
-                    throw new Error("Errore nella risposta del server");
-                }
-    
-                if (data.error) {
+            .then(response => response.json()) 
+            .then(data => {
+                if (data.success) {
+                    alert("Rapporto inviato correttamente.");
+                    form.reset();
+                } else {
                     throw new Error(data.error);
                 }
-                
-                alert("Rapporto inviato correttamente.");
-                form.reset();
             })
             .catch(error => {
-                alert("Errore durante l'invio del modulo: " + error.message);
+                alert("Errore durante l'invio: " + error.message);
                 console.error('Errore!', error);
             })
             .finally(() => {
